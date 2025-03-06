@@ -1,5 +1,6 @@
 package com.jonocoileain.wherenow.pages
 
+import androidx.compose.ui.platform.LocalUriHandler
 import android.Manifest
 import android.content.Context
 import android.content.Intent
@@ -20,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -37,6 +37,9 @@ import com.jonocoileain.wherenow.viewmodels.BirdSightingsViewModel
 import com.jonocoileain.wherenow.viewmodels.LocationViewModel
 import kotlin.time.Duration.Companion.seconds
 import android.net.Uri
+import androidx.compose.material3.Button
+import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.delay
 
 @Composable
 fun HearNowPage(modifier: Modifier = Modifier,
@@ -77,7 +80,7 @@ fun HearNowPage(modifier: Modifier = Modifier,
 
     LaunchedEffect(Unit) {
         while(true) {
-            kotlinx.coroutines.delay(1.seconds)
+            delay(1.seconds)
             ticks++
             if (ticks % 10 == 0 || ticks == 1) {
                 if(locationUtils.hasLocationPermission(context)) {
@@ -117,6 +120,7 @@ fun HearNowPage(modifier: Modifier = Modifier,
             )
         }
     }
+    var openURI: Boolean = false
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -126,7 +130,15 @@ fun HearNowPage(modifier: Modifier = Modifier,
         horizontalAlignment = Alignment.Start
     ) {
         birdSightingsViewModel.birdSightings.value?.forEach { sighting ->
-            Text(sighting.description(), fontWeight = FontWeight.SemiBold,
+            val context = LocalContext.current
+            val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse("https://ebird.org/species/${sighting.speciesCode}")) }
+
+            Text(sighting.descriptionWithoutLocation(), fontWeight = FontWeight.SemiBold,
+                color = Color.White, modifier = Modifier.clickable {
+                    context.startActivity(intent)
+                })
+
+            Text(sighting.seenAt(), fontWeight = FontWeight.SemiBold,
                 color = Color.White, modifier = Modifier.clickable {
                     val locationName = sighting.locName
                     val gmmIntentUri = Uri.parse("geo:0,0?q=$locationName")

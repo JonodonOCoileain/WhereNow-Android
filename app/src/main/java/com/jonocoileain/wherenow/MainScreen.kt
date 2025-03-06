@@ -37,8 +37,8 @@ fun MainScreen(modifier: Modifier = Modifier) {
     val navItemList = listOf(
         NavItem("Here Now!", Icons.Default.LocationOn,0),
         NavItem("Hear Now!",  ImageVector.vectorResource(R.drawable.ic_raven_24px), badgeCount = 0),
-        NavItem("Weather Now!", ImageVector.vectorResource(R.drawable.ic_sunny_24px),0),
-        NavItem("Game Now!", ImageVector.vectorResource(R.drawable.ic_videogame_asset_24px),0),
+        //NavItem("Weather Now!", ImageVector.vectorResource(R.drawable.ic_sunny_24px),0),
+        //NavItem("Game Now!", ImageVector.vectorResource(R.drawable.ic_videogame_asset_24px),0),
     )
 
     var selectedIndex by remember {
@@ -92,8 +92,8 @@ fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int) {
             locationViewModel = locationViewModel,
             context = context,
             birdSightingsViewModel = birdSightingsViewModel)
-        2-> WeatherNowPage()
-        3-> GameNowPage()
+        //2-> WeatherNowPage()
+        //3-> GameNowPage()
     }
 }
 

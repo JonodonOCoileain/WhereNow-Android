@@ -18,10 +18,13 @@ data class BirdSighting(
     val userDisplayName: String,
 ) {
     fun description(): String {
-        return comName + "\n" + sciName + "\n" + "Quantity: " + howMany + "\n" + "Seen by: " + userDisplayName + "\n" + "Seen at: " + locName + "\n"
+        return comName + "\n" + sciName + "\n" + "Quantity: " + howMany + "\n" + "Seen at: " + locName + "\n"
     }
     fun descriptionWithoutLocation(): String {
         return comName + "\n" + sciName + "\n" + "Quantity: " + howMany + "\n" + "Seen by: " + userDisplayName
+    }
+    fun seenAt(): String {
+        return "Seen at: " + locName + "\n"
     }
 }
 
