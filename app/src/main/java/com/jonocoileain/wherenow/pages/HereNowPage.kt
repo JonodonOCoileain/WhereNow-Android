@@ -56,7 +56,7 @@ fun HereNowPage(modifier: Modifier = Modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(52.dp))
         Text(
             text = "Here Now!",
             fontSize = 32.sp,

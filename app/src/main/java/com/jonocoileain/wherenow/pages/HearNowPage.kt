@@ -37,6 +37,8 @@ import com.jonocoileain.wherenow.viewmodels.BirdSightingsViewModel
 import com.jonocoileain.wherenow.viewmodels.LocationViewModel
 import kotlin.time.Duration.Companion.seconds
 import android.net.Uri
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.delay
@@ -121,6 +123,7 @@ fun HearNowPage(modifier: Modifier = Modifier,
         }
     }
     var openURI: Boolean = false
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -129,6 +132,7 @@ fun HearNowPage(modifier: Modifier = Modifier,
             .padding(16.dp),
         horizontalAlignment = Alignment.Start
     ) {
+        Spacer(modifier = Modifier.size(52.dp))
         birdSightingsViewModel.birdSightings.value?.forEach { sighting ->
             val context = LocalContext.current
             val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse("https://ebird.org/species/${sighting.speciesCode}")) }

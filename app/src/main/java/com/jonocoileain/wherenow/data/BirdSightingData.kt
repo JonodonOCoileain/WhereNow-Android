@@ -21,6 +21,12 @@ data class BirdSighting(
         return comName + "\n" + sciName + "\n" + "Quantity: " + howMany + "\n" + "Seen at: " + locName + "\n"
     }
     fun descriptionWithoutLocation(): String {
+        val name: String
+        if (userDisplayName == null) {
+            name = "unknown"
+        } else {
+            name = userDisplayName
+        }
         return comName + "\n" + sciName + "\n" + "Quantity: " + howMany + "\n" + "Seen by: " + userDisplayName
     }
     fun seenAt(): String {
